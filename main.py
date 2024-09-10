@@ -1,0 +1,3 @@
+import random, os, time; W,H,snake,dir,food,score=20,10,[(5,5)],(0,1),(random.randint(1,8),random.randint(1,18)),0
+draw=lambda:os.system('cls' if os.name=='nt' else 'clear')or print(f"+{'-'*W}+\n"+'\n'.join('|'+"".join('O'if(y,x)==snake[0]else'o'if(y,x)in snake else'*'if(y,x)==food else' 'for x in range(W))+'|'for y in range(H))+f"\n+{'-'*W}+\nScore:{score}")
+while not(snake[0][0]in[0,H-1]or snake[0][1]in[0,W-1]or snake[0]in snake[1:]):draw();time.sleep(0.2);key=input("Move:").strip().lower();dir={'w':(-1,0),'s':(1,0),'a':(0,-1),'d':(0,1)}.get(key,dir);snake.insert(0,(snake[0][0]+dir[0],snake[0][1]+dir[1]));(score:=score+1)if snake[0]==food and(food:=(random.randint(1,H-2),random.randint(1,W-2)))else snake.pop()
